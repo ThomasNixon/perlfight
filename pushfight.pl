@@ -22,11 +22,21 @@ process_move("m c2 c3", @board);
 
 board_display(@board);
 
-push_piece(2, 2, "s", @board);
-push_piece(3, 2, "e", @board);
+#push_piece(2, 2, "s", @board);
+#push_piece(3, 2, "e", @board);
+
+push_command("p c3 e");
 
 board_display(@board);
 
+sub push_command {
+    my ($str, @board) = @_;
+    my $dir = substr($str, 5, 1);
+    my $r = substr($str, 3, 1) - 1;
+	my $c = ord(substr($str, 2, 1)) - 97;
+    print "$dir, $r, $c";
+    push_piece($r, $c, $dir, @board);
+}
 
 sub push_piece {
 	my ($r, $c, $dir, @board) = @_;
